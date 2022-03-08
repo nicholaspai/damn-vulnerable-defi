@@ -40,6 +40,11 @@ describe('[Challenge] Unstoppable', function () {
 
     it('Exploit', async function () {
         /** CODE YOUR EXPLOIT HERE */
+
+        // `flashLoan()` checks that pool's balanceOf == poolBalance, which can be easily manipulated by just sending
+        // tokens to the contract. The contract should add a `sync()` method to sync balances or not keep its own
+        // accounting system.
+        await this.token.transfer(this.pool.address, "1")
     });
 
     after(async function () {
